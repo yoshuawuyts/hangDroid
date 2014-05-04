@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.GridView;
 
 public class GameActivity extends Activity {
 	private String[] words;
@@ -17,6 +18,8 @@ public class GameActivity extends Activity {
 	private String currWord;
 	private LinearLayout wordLayout;
 	private TextView[] charViews;
+	private GridView letters;
+	private LetterAdapter ltrAdapt;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +30,36 @@ public class GameActivity extends Activity {
 	  rand = new Random();
 	  currWord = "";
 	  wordLayout = (LinearLayout)findViewById(R.id.word);
+	  
+	  // get a reference to the grid view
+	  letters = (GridView)findViewById(R.id.letters);
+	  
+	  // call playGame
 	  playGame();
 	}
 	
 	private void playGame() {
 		String newWord = words[rand.nextInt(words.length)];
 		while(newWord.equals(currWord)) newWord = words[rand.nextInt(words.length)];
+		
+		// update instance with new word
 		currWord = newWord;
+		
+		// create text view for each letter
+		charViews = new TextView[currWord.length()];
+		
+		// remove any text views from wordLayout layout
 		wordLayout.removeAllViews();
 		
+		// Use a simple for loop to iterate over each letter of the answer, 
+		// create a text view for each letter, 
+		// and set the text view's text to the current letter.
 		for (int c = 0; c < currWord.length(); c++) {
 		  charViews[c] = new TextView(this);
 		  charViews[c].setText(""+currWord.charAt(c));
 		}
 		
+		// access the character inside the string at a specific index
 		for (int c = 0; c < currWord.length(); c++) {
 		  charViews[c] = new TextView(this);
 		  charViews[c].setText(""+currWord.charAt(c));
@@ -53,5 +72,8 @@ public class GameActivity extends Activity {
 		  //add to layout
 		  wordLayout.addView(charViews[c]);
 		}
+		
+		ltrAdapt=new LetterAdapter(this);
+		letters.setAdapter(ltrAdapt);
 	}
 }

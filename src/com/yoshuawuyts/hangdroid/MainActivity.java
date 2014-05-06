@@ -26,16 +26,16 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+		    .add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
 	
 	@Override
 	public void onClick(View view) {
 		if (view.getId() == R.id.playBtn) {
-			  Intent playIntent = new Intent(this, GameActivity.class);
-			  this.startActivity(playIntent);
-			}
+		  Intent playIntent = new Intent(this, GameActivity.class);
+		  this.startActivity(playIntent);
+		}
 	}
 
 	@Override

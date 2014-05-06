@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-	      android:name="com.yoshuawuyts.hangDroid.GameActivity"
-	      android:parentActivityName="com.yoshuawuyts.hangDroid.MainActivity"
+	      android:name="com.yoshuawuyts.hangdroid.GameActivity"
+	      android:parentActivityName="com.yoshuawuyts.hangdroid.MainActivity"
 	      android:screenOrientation="portrait" >
         </activity>
         

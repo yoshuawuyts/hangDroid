@@ -1,11 +1,19 @@
 package com.yoshuawuyts.hangdroid;
 
+/**
+ * Module dependencies
+ */
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.Button;
+
+/**
+ * Main LetterAdapter
+ */
 
 public class LetterAdapter extends BaseAdapter {
 	private String[] letters;
@@ -18,24 +26,39 @@ public class LetterAdapter extends BaseAdapter {
 		  letters[a] = "" + (char)(a+'A');
 		}
 		
-		// 
 		letterInf = LayoutInflater.from(c);
 	}
+
+	/**
+	 * Get letter count
+	 */
 
 	@Override
 	public int getCount() {
 	  return letters.length;
 	}
 
+	/**
+	 * Null
+	 */
+
 	@Override
 	public Object getItem(int arg0) {
 	  return null;
 	}
 	 
+	/**
+	 * Get item ID
+	 */
+
 	@Override
 	public long getItemId(int arg0) {
 	  return 0;
 	}
+
+	/**
+	 * Get corresponding adapter view
+	 */
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

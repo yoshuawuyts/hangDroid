@@ -2,8 +2,10 @@
 <resources>
 
     <string name="app_name">hangDroid</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="hello_world">hangDroid</string>
+    <string name="settings_restart">Restart</string>
+    <string name="settings_highscore">Highscores</string>
+    <string name="settings_settings">Settings</string>
     <string name="play">Play</string>
 
 </resources>

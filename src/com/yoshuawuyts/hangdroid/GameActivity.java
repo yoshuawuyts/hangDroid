@@ -20,11 +20,9 @@ import android.widget.TextView;
 import android.widget.GridView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 /**
  * Main
@@ -123,6 +121,37 @@ public class GameActivity extends Activity {
 		currPart=0;
 		numChars=currWord.length();
 		numCorr=0;
+	}
+	
+	/**
+	 * Initialize menu
+	 */
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/**
+	 * Handle clicks on menu
+	 */
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	  switch (item.getItemId()) {
+	  	case R.id.settings_restart:
+	  		GameActivity.this.playGame();
+	  		return true;
+		  case R.id.settings_highscore:
+			  //NavUtils.navigateUpFromSameTask(this);
+			  return true;
+		  case R.id.settings_settings:
+		    //showHelp();
+		    return true;
+	  }
+	  return super.onOptionsItemSelected(item);
 	}
 	
 	/**

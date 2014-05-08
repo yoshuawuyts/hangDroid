@@ -36,6 +36,7 @@ public class GameActivity extends Activity {
 	private String currWord;
 	private LinearLayout wordLayout;
 	private TextView[] charViews;
+	private TextView txtname;
 	private GridView letters;
 	private LetterAdapter ltrAdapt;
 	
@@ -61,10 +62,14 @@ public class GameActivity extends Activity {
 	  words = res.getStringArray(R.array.words);
 	  rand = new Random();
 	  currWord = "";
+
+	  // get a reference to the linearLayout view
 	  wordLayout = (LinearLayout)findViewById(R.id.word);
 	  
 	  // get a reference to the grid view
 	  letters = (GridView)findViewById(R.id.letters);
+
+	  txtname = (TextView) findViewById(R.id.txtName);
 	  
 	  // call playGame
 	  playGame();
@@ -90,16 +95,11 @@ public class GameActivity extends Activity {
 		
 		// Use a simple for loop to iterate over each letter of the answer, 
 		// create a text view for each letter, 
-		// and set the text view's text to the current letter.
-		for (int c = 0; c < currWord.length(); c++) {
-		  charViews[c] = new TextView(this);
-		  charViews[c].setText(""+currWord.charAt(c));
-		}
-		
+		// and set the text view's text to the current letter.		
 		// access the character inside the string at a specific index
 		for (int c = 0; c < currWord.length(); c++) {
 		  charViews[c] = new TextView(this);
-		  charViews[c].setText(""+currWord.charAt(c));
+		  charViews[c].setText("" + currWord.charAt(c));
 		 
 		  charViews[c].setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		  charViews[c].setGravity(Gravity.CENTER);
@@ -109,7 +109,13 @@ public class GameActivity extends Activity {
 		  //add to layout
 		  wordLayout.addView(charViews[c]);
 		}
+
+		// initialize counter
 		
+		txtname.setText("" + numParts);
+		txtname.setGravity(Gravity.CENTER);
+		txtname.setTextColor(Color.WHITE);
+
 		ltrAdapt=new LetterAdapter(this);
 		letters.setAdapter(ltrAdapt);
 		
@@ -143,7 +149,9 @@ public class GameActivity extends Activity {
 	    }
 	  }
 	  
+	  // handle press decision tree
 	  if (correct) {
+	  	// game complete
 		  if (numCorr == numChars) {
 			  // Disable Buttons
 			  disableBtns();
@@ -156,19 +164,24 @@ public class GameActivity extends Activity {
 			    new DialogInterface.OnClickListener() {
 			      public void onClick(DialogInterface dialog, int id) {
 			        GameActivity.this.playGame();
-			    }});
+			    	}
+			  	}
+	    	);
 			 
 			  winBuild.setNegativeButton("Exit",
 			    new DialogInterface.OnClickListener() {
 			      public void onClick(DialogInterface dialog, int id) {
-			        GameActivity.this.finish();
-			    }});
+		  	      GameActivity.this.finish();
+	    			}
+	    		}
+	    	);
 			 
 			  winBuild.show();
 			}
 		} else if (currPart < numParts) {
 		  //some guesses left
 		  currPart++;
+		  txtname.setText("" + (numParts - currPart));
 		} else {
 		  //user has lost
 		  disableBtns();
@@ -181,13 +194,17 @@ public class GameActivity extends Activity {
 		    new DialogInterface.OnClickListener() {
 		      public void onClick(DialogInterface dialog, int id) {
 		        GameActivity.this.playGame();
-		    }});
+		   		}
+		 		}
+	 		);
 		 
 		  loseBuild.setNegativeButton("Exit",
 		    new DialogInterface.OnClickListener() {
 		      public void onClick(DialogInterface dialog, int id) {
 		        GameActivity.this.finish();
-		    }});
+		   		}
+		   	}
+		  );
 		 
 		  loseBuild.show();
 		}
@@ -199,9 +216,9 @@ public class GameActivity extends Activity {
 	 */
 	
 	public void disableBtns() {
-		  int numLetters = letters.getChildCount();
-		  for (int l = 0; l < numLetters; l++) {
-		    letters.getChildAt(l).setEnabled(false);
-		  }
-		}
+	  int numLetters = letters.getChildCount();
+	  for (int l = 0; l < numLetters; l++) {
+	    letters.getChildAt(l).setEnabled(false);
+	  }
+	}
 }

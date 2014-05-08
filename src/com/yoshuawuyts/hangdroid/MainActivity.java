@@ -28,6 +28,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			getSupportFragmentManager().beginTransaction()
 		    .add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		Intent playIntent = new Intent(this, GameActivity.class);
+		this.startActivity(playIntent);
 	}
 	
 	@Override
